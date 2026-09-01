@@ -1,13 +1,30 @@
 import { Routes } from '@angular/router';
 import { Dashboard } from './pages/dashboard/dashboard';
+import { Layout } from './layout/layout';
+import { Login } from './pages/login/login';
+import { Employee } from './pages/employee/employee';
+import { ProjectEmployee } from './pages/project-employee/project-employee';
+import { Project } from './pages/project/project';
 
 export const routes: Routes = [
-  //default page for admins
+  // Default redirect to login page
   { path: '', redirectTo: 'login', pathMatch: 'full' },
-  { path: 'login', loadComponent: () => import('./pages/login/login').then(m => m.Login) },//refuses component: LoginComponent
-  { path: 'dashboard', component: Dashboard },
-  { path: 'project-employee', loadComponent: () => import('./pages/project-employee/project-employee').then(m => m.ProjectEmployee) },
-  { path: 'project', loadComponent: () => import('./pages/project/project').then(m => m.Project) },
 
-  // Add other page routes here
+  // Standalone standalone pages (without main header layout)
+  { path: 'login', component: Login },
+
+  // Pages wrapped inside your Layout (Header + Router Outlet)
+  {
+    path: '',
+    component: Layout,
+    children: [
+      { path: 'dashboard', component: Dashboard },
+      { path: 'employee', component: Employee },
+      { path: 'project-employee', component: ProjectEmployee },
+      { path: 'project', component: Project },
+    ]
+  },
+
+  // Fallback wildcard route for broken links
+  { path: '**', redirectTo: 'login' }
 ];
