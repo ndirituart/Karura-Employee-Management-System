@@ -1,6 +1,7 @@
 import { Component, inject } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
+import { NotificationService } from '../../services/notifications.service';
 
 @Component({
   selector: 'app-login',
@@ -9,25 +10,35 @@ import { Router } from '@angular/router';
   styleUrl: './login.css',
 })
 export class Login {
+  private readonly notification: NotificationService = inject(NotificationService);
+
   //1. Create an object that handles the form values for email and password.
-  // This object will be used to bind the form inputs to the component's properties.
   loginObj: any =
   {
-  email: '', //instead of username for security and authentication
+  email: '',
   password: ''
     }
   //2. Create a function that handles the form submission when the user clicks the login button.
   router = inject(Router);
 
-  onLogin() {
-    //3. Temporary credentials for testing purposes. In a real application, you would validate the credentials against a backend service.
-    if (this.loginObj.email === 'ndiritupatience002@gmail.com' && this.loginObj.password === '123456abj') {
-      //4. Navigate to the dashboard page upon successful login.
+  onLogin(): void {
+  // 1. Show Blue Loading Banner while validating
+  this.notification.showLoading('Logging into Karura MIS...');
+
+  // Simulate network request/delay
+  setTimeout(() => {
+    // 2. Validate credentials
+   if (this.loginObj.email === 'ndiritupatience002@gmail.com' && this.loginObj.password === '123456abj') {
+      // 3. Show Green Success Banner
+      this.notification.showSuccess('Login successful! Redirecting...');
+
+      // 4. Navigate to Dashboard
       this.router.navigate(['/dashboard']);
+    } else {
+      // 5. Show Red Error Banner (replaces alert)
+      this.notification.showError('Invalid email or password. Please try again.');
     }
-    else {
-      //5. Display an error message if the credentials are invalid.
-      alert('Invalid email or password. Please try again.');
-    }
-  }
+  }, 1000);
+}
+
 }

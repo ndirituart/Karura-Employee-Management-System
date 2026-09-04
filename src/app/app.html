@@ -26,7 +26,7 @@
 
 <section class="content-container">
   <p>
-    This is the Management Information System (MIS) that manages employee data, employer data, project data 
+    This is the Management Information System (MIS) that manages employee data, employer data, project data
     on behalf of Friends of Karura. This system is built for the employees,
     managers and admins for Karura Forest Management.
   </p>
@@ -34,18 +34,22 @@
 
 
 <main>
-  <router-outlet></router-outlet>
+  <app-notification-banner></app-notification-banner> <!--Had to be wrapped in a component to avoid errors-->
+  <div class="auth-container">
+    <router-outlet></router-outlet>
+  </div>
 </main>
 
 <script>
-  import { Component } from '@angular/core';
+import { Component } from '@angular/core';
 import { RouterOutlet, RouterLink } from '@angular/router';
 import routes from './app.routes';
+import notificationBanner from './components/notification-banner/notification-banner.component';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet, RouterLink],
+  imports: [RouterOutlet, RouterLink, notificationBanner],
   templateUrl: './app.html',
   styleUrl: './app.css'
 })
