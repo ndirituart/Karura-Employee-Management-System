@@ -1,1 +1,58 @@
-<p>login works!</p>
+<div class="auth-wrapper">
+  <div class="auth-card" id="auth-card">
+    <div class="auth-header">
+      <button type="button" class="auth-tab active" data-action="login">Login</button>
+    </div>
+
+    <!-- Login Form -->
+    <form id="login-form" class="auth-form active" aria-labelledby="login-heading">
+      <h2 id="login-heading">Welcome Back!</h2>
+      <div class="form-group">
+        <label for="login-email">Email:</label>
+        <input type="email" id="login-email" name="email" required autocomplete="email" aria-required="true">
+        <div class="error-message" id="login-email-error" aria-live="polite"></div>
+      </div>
+      <div class="form-group password-group">
+        <label for="login-password">Password:</label>
+        <input type="password" id="login-password" name="password" required autocomplete="current-password" aria-required="true">
+        <span class="password-toggle" data-target="login-password" role="button" aria-label="Show password"><i class="bi bi-eye"></i></span>
+        <div class="error-message" id="login-password-error" aria-live="polite"></div>
+      </div>
+      <div class="form-group checkbox-group">
+        <input type="checkbox" id="remember-me" name="remember-me">
+        <label for="remember-me">Remember me</label>
+      </div>
+      <button type="submit" class="submit-btn" id="login-submit-btn">
+        <span class="btn-text">Login</span>
+        <span class="spinner hidden"><i class="bi bi-arrow-repeat spin"></i></span>
+      </button>
+      <a href="#" id="forgot-password" class="auth-link">Forgot Password?</a>
+      <div class="auth-message success" id="login-success" aria-live="polite"></div>
+      <div class="auth-message error" id="login-error" aria-live="polite"></div>
+    </form>
+
+    <!-- Register Form -->
+    <form id="register-form" class="auth-form hidden" aria-labelledby="register-heading">
+      <h2 id="register-heading">Create Account</h2>
+      <div class="form-group">
+        <label for="register-username">Username:</label>
+        <input type="text" id="register-username" name="username" required autocomplete="username" aria-required="true">
+        <div class="error-message" id="register-username-error" aria-live="polite"></div>
+      </div>
+      <div class="form-group">
+        <label for="register-email">Email:</label>
+        <input type="email" id="register-email" name="email" required autocomplete="email" aria-required="true">
+        <div class="error-message" id="register-email-error" aria-live="polite"></div>
+      </div>
+      <div class="form-group password-group">
+        <label for="register-password">Password:</label>
+        <input type="password" id="register-password" name="password" required autocomplete="new-password" aria-required="true">
+        <span class="password-toggle" data-target="register-password" role="button" aria-label="Show password"><i class="bi bi-eye"></i></span>
+        <div class="error-message" id="register-password-error" aria-live="polite"></div>
+      </div>
+      <button type="submit" class="submit-btn" id="register-submit-btn">
+        <span class="btn-text">Register</span>
+      </button>
+    </form>
+  </div>
+</div>

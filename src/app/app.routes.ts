@@ -5,13 +5,17 @@ import { Login } from './pages/login/login';
 import { Employee } from './pages/employee/employee';
 import { ProjectEmployee } from './pages/project-employee/project-employee';
 import { Project } from './pages/project/project';
+import { appConfig } from './app.config';
+import { App } from './app';
+// import { AuthGuard } from './guards/auth.guard';
 
 export const routes: Routes = [
   // Default redirect to login page
-  { path: '', redirectTo: 'login', pathMatch: 'full' },
+  { path: '', redirectTo: '', pathMatch: 'full' },
 
   // Standalone standalone pages (without main header layout)
   { path: 'login', component: Login },
+  { path: 'app', component: App },
 
   // Pages wrapped inside your Layout (Header + Router Outlet)
   {
