@@ -9,12 +9,14 @@
       <h2 id="login-heading">Welcome Back!</h2>
       <div class="form-group">
         <label for="login-email">Email:</label>
-        <input type="email" id="login-email" name="email" required autocomplete="email" aria-required="true">
+        <!--Connected to loginObj.email-->
+        <input type="email" id="login-email" name="email" [(ngModel)]="loginObj.email" required autocomplete="email" aria-required="true">
         <div class="error-message" id="login-email-error" aria-live="polite"></div>
       </div>
       <div class="form-group password-group">
         <label for="login-password">Password:</label>
-        <input type="password" id="login-password" name="password" required autocomplete="current-password" aria-required="true">
+        <!--Connected to loginObj.password-->
+        <input type="password" id="login-password" name="password" [(ngModel)]="loginObj.password" required autocomplete="current-password" aria-required="true">
         <span class="password-toggle" data-target="login-password" role="button" aria-label="Show password"><i class="bi bi-eye"></i></span>
         <div class="error-message" id="login-password-error" aria-live="polite"></div>
       </div>
@@ -22,7 +24,8 @@
         <input type="checkbox" id="remember-me" name="remember-me">
         <label for="remember-me">Remember me</label>
       </div>
-      <button type="submit" class="submit-btn" id="login-submit-btn">
+      <!--Change to onLogin to handle form submission-->
+      <button type="button" class="submit-btn" id="login-submit-btn" (click)="onLogin()">
         <span class="btn-text">Login</span>
         <span class="spinner hidden"><i class="bi bi-arrow-repeat spin"></i></span>
       </button>
