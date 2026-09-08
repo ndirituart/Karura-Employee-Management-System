@@ -1,33 +1,36 @@
-/* Reset & Fonts */
-* {
-  box-sizing: border-box;
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+/* Header Base Container */
+.main-header {
+  width: 100%;
+  background-color: #ffffff;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+  position: sticky;
+  top: 0;
+  z-index: 1000;
 }
 
-/* 1. Top Utility Contact Bar */
-.top-bar {
+/* Row 1: Top Contact Bar */
+.top-row {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background-color: #ffffff;
-  padding: 8px 40px;
-  font-size: 0.85rem;
-  color: #666;
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 12px 40px;
   border-bottom: 1px solid #eef0f2;
 }
 
-.utility-links span {
-  cursor: pointer;
-  margin: 0 4px;
-}
-
-.utility-links span:hover {
-  color: #2e7d32;
+.logo img {
+  height: 60px;
+  width: auto;
+  display: block;
 }
 
 .contact-info {
   display: flex;
+  align-items: center;
   gap: 20px;
+  font-size: 0.85rem;
+  color: #666;
 }
 
 .contact-info span {
@@ -40,71 +43,39 @@
   color: #2e7d32;
 }
 
-/* 2. Main Navigation Bar */
-.main-header {
+/* Row 2: Navigation Links Bar */
+.bottom-row {
+  display: flex;
+  justify-content: center; /* Center links, or use flex-start to align left */
+  align-items: center;
   background-color: #ffffff;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
-  position: sticky;
-  top: 0;
-  z-index: 1000;
+  padding: 8px 40px;
 }
 
-.header-container {
+.nav-links {
   display: flex;
-  justify-content: space-between;
-  align-items: center;
-  max-width: 1400px;
-  margin: 0 auto;
-  padding: 10px 40px;
+  list-style: none;
+  gap: 1.5rem;
+  margin: 0;
+  padding: 0;
 }
 
-.logo img {
-  height: 60px;
-  width: auto;
-  display: block;
-}
-
-/* 3. Navigation Links */
-.nav-menu {
-  display: flex;
-  align-items: center;
-  gap: 25px;
-}
-
-.nav-menu a {
+.nav-links a {
   text-decoration: none;
   color: #1a331e;
-  font-weight: 700;
-  font-size: 0.95rem;
-  padding: 10px 0;
-  position: relative;
-  display: flex;
-  align-items: center;
-  gap: 4px;
-  transition: color 0.2s ease;
+  font-weight: 600;
+  padding: 8px 16px;
+  border-radius: 6px;
+  transition: all 0.2s ease-in-out;
 }
 
-.nav-menu a i {
-  font-size: 0.75rem;
-  transition: transform 0.2s ease;
-}
-
-/* Hover & Active States */
-.nav-menu a:hover,
-.nav-menu a.active {
+.nav-links a:hover {
   color: #388e3c;
 }
 
-/* Underline Indicator for Active Page (matching Green line under Quick Links) */
-.nav-menu a.active::after {
-  content: '';
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  width: 100%;
-  height: 3px;
-  background-color: #388e3c;
-  border-radius: 2px;
+.nav-links a.active {
+  color: #ffffff;
+  background-color: #2e7d32;
 }
 
 /* 4. Search Icon Button */

@@ -1,23 +1,30 @@
-<header class="navbar">
-   <!--Changing default app to have a welcome page for the company-->
-  <div class="logo">
-    <img src="assets/logo.png" alt="Kenya Forest Service official logo" />
-  </div>
-<div class="top-bar">
-  <div class="utility-links">
-    <span></span>
-  </div>
-  <div class="contact-info">
-    <span><i class="bi bi-telephone"></i> 0800 721 277 - Toll Free</span>
-    <span><i class="bi bi-clock"></i> Mon - Fri ( 8am - 5pm ) Sat & Sun CLOSED</span>
-    <span><i class="bi bi-envelope"></i> info@kenyaforestservice.org</span>
-     <div class="search-btn">
-      <i class="bi bi-search"></i>
+<header class="main-header">
+  <!-- Row 1: Top Bar with Logo & Contact Details -->
+  <div class="top-row">
+    <div class="logo">
+      <img src="assets/logo.png" alt="Kenya Forest Service official logo" />
+    </div>
+
+    <div class="contact-info">
+      <span><i class="bi bi-telephone"></i> 0800 721 277 - Toll Free</span>
+      <span><i class="bi bi-clock"></i> Mon - Fri ( 8am - 5pm ) Sat & Sun CLOSED</span>
+      <span><i class="bi bi-envelope"></i> info@kenyaforestservice.org</span>
+      <div class="search-btn">
+        <i class="bi bi-search"></i>
+      </div>
     </div>
   </div>
-</div>
-</header>
 
+  <!-- Row 2: Bottom Bar with Navigation Links -->
+ <nav class="bottom-row">
+    <div class="nav-links">
+      <a routerLink="/" routerLinkActive="active">Home</a>
+      <a routerLink="/employee" routerLinkActive="active">Employees</a>
+      <a routerLink="/project" routerLinkActive="active">Projects</a>
+      <a routerLink="/project-employee" routerLinkActive="active">Project-Employee</a>
+    </div>
+  </nav>
+</header>
   <section class="hero-banner">
   <div class="hero-overlay">
     <h1>Karura Employees MIS</h1>
@@ -41,15 +48,20 @@
 </main>
 
 <script>
-import { Component } from '@angular/core';
-import { RouterOutlet, RouterLink } from '@angular/router';
-import routes from './app.routes';
-import notificationBanner from './components/notification-banner/notification-banner.component';
+  //In modern Angular (v17+), simply import RouterLink and RouterLinkActive directly into your component. RouterLinkActiveOptions should not be in the imports array.
+  import { Component } from '@angular/core';
+import { RouterOutlet, RouterLink, RouterLinkActive } from '@angular/router';
+import { NotificationBannerComponent } from './components/notification-banner/notification-banner.component';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet, RouterLink, notificationBanner],
+  imports: [
+    RouterOutlet,
+    RouterLink,
+    RouterLinkActive,
+    NotificationBannerComponent
+  ],
   templateUrl: './app.html',
   styleUrl: './app.css'
 })
