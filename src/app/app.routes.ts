@@ -5,19 +5,15 @@ import { Login } from './pages/login/login';
 import { Employee } from './pages/employee/employee';
 import { ProjectEmployee } from './pages/project-employee/project-employee';
 import { Project } from './pages/project/project';
-import { appConfig } from './app.config';
-import { App } from './app';
-// import { AuthGuard } from './guards/auth.guard';
 
 export const routes: Routes = [
-  // Default redirect to login page
-  { path: '', redirectTo: '', pathMatch: 'full' },
+  // 1. Fix default redirect (Redirect to login or dashboard)
+  { path: '', redirectTo: 'login', pathMatch: 'full' },
 
-  // Standalone standalone pages (without main header layout)
+  // 2. Standalone auth route (outside main layout)
   { path: 'login', component: Login },
-  { path: 'app', component: App },
 
-  // Pages wrapped inside your Layout (Header + Router Outlet)
+  // 3. Authenticated routes wrapped inside Layout (Header + Navigation + Child Router Outlet)
   {
     path: '',
     component: Layout,
@@ -29,6 +25,6 @@ export const routes: Routes = [
     ]
   },
 
-  // Fallback wildcard route for broken links
+  // 4. Fallback route for broken links
   { path: '**', redirectTo: 'login' }
 ];

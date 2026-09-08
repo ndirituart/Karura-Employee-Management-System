@@ -58,9 +58,11 @@
   gap: 1.5rem;
   margin: 0;
   padding: 0;
+  pointer-events: auto !important; /* Force enable click events */
 }
 
 .nav-links a {
+  cursor: pointer !important; /*Ensure the cursor is a pointer for links*/
   text-decoration: none;
   color: #1a331e;
   font-weight: 600;
@@ -100,7 +102,7 @@
   width: 100vw;
   height: 200px;
   /* Adjust image path to your asset location */
-  background-image: url('/src/assets/karura-forest.jpg');
+  /* background-image: url('../assets/karura-forest.jpg'); */
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
