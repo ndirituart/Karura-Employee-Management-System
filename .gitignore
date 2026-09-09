@@ -1,44 +1,36 @@
-# See https://docs.github.com/get-started/getting-started-with-git/ignoring-files for more about ignoring files.
+# ==========================================
+# .NET / C# Exclusions
+# ==========================================
+**/bin/
+**/obj/
+**/.vs/
+**/*.user
+**/*.userosscache
+**/*.sln.docstates
+**/appsettings.Development.json
+**/appsettings.Local.json
 
-# Compiled output
-/dist
-/tmp
-/out-tsc
-/bazel-out
+# ==========================================
+# Angular / Node.js Exclusions
+# ==========================================
+**/node_modules/
+**/.angular/
+**/dist/
+**/tmp/
+**/.sass-cache/
+**/connect.lock
+**/coverage/
+*.log
 
-# Node
-/node_modules
-npm-debug.log
-yarn-error.log
-
-# IDEs and editors
-.idea/
-.project
-.classpath
-.c9/
-*.launch
-.settings/
-*.sublime-workspace
-
-# Visual Studio Code
+# ==========================================
+# Environment & IDE Exclusions
+# ==========================================
+.DS_Store
+Thumbs.db
+*.swp
+*.bak
 .vscode/*
 !.vscode/settings.json
 !.vscode/tasks.json
 !.vscode/launch.json
 !.vscode/extensions.json
-!.vscode/mcp.json
-.history/*
-
-# Miscellaneous
-/.angular/cache
-.sass-cache/
-/connect.lock
-/coverage
-/libpeerconnection.log
-testem.log
-/typings
-__screenshots__/
-
-# System files
-.DS_Store
-Thumbs.db
