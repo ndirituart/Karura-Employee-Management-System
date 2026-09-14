@@ -59,16 +59,7 @@ builder.Services.AddControllers().AddNewtonsoftJson(options =>
     options.SerializerSettings.ContractResolver = new Newtonsoft.Json.Serialization.DefaultContractResolver();
     options.SerializerSettings.Formatting = Newtonsoft.Json.Formatting.Indented;
 });
-builder.Services.AddControllers().AddJsonOptions(options =>
-{
-    options.JsonSerializerOptions.PropertyNamingPolicy = null;
-    options.JsonSerializerOptions.DictionaryKeyPolicy = null;
-    options.JsonSerializerOptions.WriteIndented = true;
-});
-
-//Connect to UserDbContext for user management
-builder.Services.AddDbContext<UserDbContext>(options =>
-    options.UseSqlServer(builder.Configuration.GetConnectionString("UserCon") ?? throw new InvalidOperationException("Connection string 'UserDbContext' not found.")));
+builder
 
 var app = builder.Build();
 

@@ -65,10 +65,7 @@ builder.Services.AddControllers().AddJsonOptions(options =>
     options.JsonSerializerOptions.DictionaryKeyPolicy = null;
     options.JsonSerializerOptions.WriteIndented = true;
 });
-
-//Connect to UserDbContext for user management
-builder.Services.AddDbContext<UserDbContext>(options =>
-    options.UseSqlServer(builder.Configuration.GetConnectionString("UserCon") ?? throw new InvalidOperationException("Connection string 'UserDbContext' not found.")));
+builder.Services.AddDbContect <
 
 var app = builder.Build();
 

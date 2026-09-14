@@ -38,37 +38,7 @@ builder.Services.AddAuthorization(options =>
     options.AddPolicy("AdminOnly", policy => policy.RequireRole("Admin"));
     options.AddPolicy("UserOnly", policy => policy.RequireRole("User"));
 });
-//add CORS policy to allow requests from any origin (http:localhost:4200) for development purposes
-builder.Services.AddCors(options =>
-{
-    options.AddPolicy("AllowAll", builder =>
-    {
-        builder.AllowAnyOrigin()
-               .AllowAnyMethod()
-               .AllowAnyHeader();
-    });
-});
-builder.Services.AddControllers().AddJsonOptions(options =>
-{
-    options.JsonSerializerOptions.PropertyNamingPolicy = null;
-    options.JsonSerializerOptions.DictionaryKeyPolicy = null;
-    options.JsonSerializerOptions.WriteIndented = true;
-});
-builder.Services.AddControllers().AddNewtonsoftJson(options =>
-{
-    options.SerializerSettings.ContractResolver = new Newtonsoft.Json.Serialization.DefaultContractResolver();
-    options.SerializerSettings.Formatting = Newtonsoft.Json.Formatting.Indented;
-});
-builder.Services.AddControllers().AddJsonOptions(options =>
-{
-    options.JsonSerializerOptions.PropertyNamingPolicy = null;
-    options.JsonSerializerOptions.DictionaryKeyPolicy = null;
-    options.JsonSerializerOptions.WriteIndented = true;
-});
-
-//Connect to UserDbContext for user management
-builder.Services.AddDbContext<UserDbContext>(options =>
-    options.UseSqlServer(builder.Configuration.GetConnectionString("UserCon") ?? throw new InvalidOperationException("Connection string 'UserDbContext' not found.")));
+builder.
 
 var app = builder.Build();
 
