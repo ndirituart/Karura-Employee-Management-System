@@ -4,7 +4,6 @@ namespace KaruraEmployeesMIS.Controllers;
 
 [ApiController]
 [Route("api/[controller]")]
-[EnableCors ("allowCors")]
 public class UserController : ControllerBase
 {
     //1. API endpoint to create a new user. The endpoint accepts a POST request
@@ -32,24 +31,26 @@ public class UserController : ControllerBase
     public IActionResult Login([FromBody] UserLogin userLogin)
     {
         var user = _context.Users.FirstOrDefault(u => u.emailId == userLogin.emailId && u.password == userLogin.password);
-        if (user == null)
+
+        if (user != null)
         {
-            return StatusCode(401, "Invalid email or password")
+            // // Generate JWT token (NOT YET LEARNT)
+            // var token = GenerateJwtToken(user);
+            // return Ok(new { Token = token });
         }
-        else{
-            return StatusCode(200, "Successful Login!",user)
+        else
+        {
+            return Unauthorized("Invalid email or password.");
         }
     }
     // 3.  API endpoint to retrieve all users. The endpoint accepts a GET request and returns a 200 OK response with the list of users in the response body.
 
-    [HttpGet= ("GetUsers")]
+    [HttpGet]
 	public IActionResult GetUsers()
 	{
-        var list = _context.Users.ToList();
-		return Ok(list);
+		return Ok(Array.Empty<object>());
 	}
 
-    //4. API endpoint to get user by ID
 	[HttpGet("{id:int}")]
 	public IActionResult GetUser(int id)
 	{

@@ -39,13 +39,11 @@ builder.Services.AddAuthorization(options =>
     options.AddPolicy("UserOnly", policy => policy.RequireRole("User"));
 });
 //add CORS policy to allow requests from any origin (http:localhost:4200) for development purposes
-builder.Service.AddCors();
-
+builder.Service.AddCors()
 builder.Services.AddCors(options =>
 {
-    options.AddPolicy("allowCors", builder =>
+    options.AddPolicy("AllowAll", builder =>
     {
-        builder._withOrigins ("https://localhost:4200,")
         builder.AllowAnyOrigin()
                .AllowAnyMethod()
                .AllowAnyHeader();

@@ -4,7 +4,6 @@ namespace KaruraEmployeesMIS.Controllers;
 
 [ApiController]
 [Route("api/[controller]")]
-[EnableCors ("allowCors")]
 public class UserController : ControllerBase
 {
     //1. API endpoint to create a new user. The endpoint accepts a POST request
@@ -45,11 +44,10 @@ public class UserController : ControllerBase
     [HttpGet= ("GetUsers")]
 	public IActionResult GetUsers()
 	{
-        var list = _context.Users.ToList();
-		return Ok(list);
+        var list = _context.Users
+		return Ok(Array.Empty<object>());
 	}
 
-    //4. API endpoint to get user by ID
 	[HttpGet("{id:int}")]
 	public IActionResult GetUser(int id)
 	{

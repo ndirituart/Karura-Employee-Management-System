@@ -4,7 +4,6 @@ namespace KaruraEmployeesMIS.Controllers;
 
 [ApiController]
 [Route("api/[controller]")]
-[EnableCors ("allowCors")]
 public class UserController : ControllerBase
 {
     //1. API endpoint to create a new user. The endpoint accepts a POST request

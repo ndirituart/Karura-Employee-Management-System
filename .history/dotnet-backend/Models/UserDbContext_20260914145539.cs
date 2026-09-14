@@ -36,11 +36,11 @@ namespace dotnet_backend.Models
             public string createdDate { get; set; }
         }
 
-            //4.  To login a user
-        public class UserLogin
-        {
-            public string emailId {get; set;}
-            public string password {get; set;}
-        }
+        //4.  To login a user
+    public class UserLogin
+    {
+        public string emailId {get; set;}
+        public string password {get; set;}
+    }
     }
 }
