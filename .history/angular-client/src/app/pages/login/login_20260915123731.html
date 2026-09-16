@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Portal</title> <!-- Initial title, will be updated by JS -->
+
+    <!-- Primary Meta Tags -->
+    <meta name="description" content="A secure and modern authentication portal demonstrating best practices for login, registration, and 2FA. Built with HTML, CSS, and JavaScript.">
+    <meta name="keywords" content="authentication, login, signup, register, 2FA, two-factor authentication, security, web development, HTML, CSS, JavaScript, frontend, portal">
+    <meta name="author" content="Karthik">
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://www.yourdomain.com/auth-portal"> <!-- TODO: Replace with your actual URL -->
+    <meta property="og:title" content="Secure Auth Portal - Login & Register">
+    <meta property="og:description" content="A secure and modern authentication portal demonstrating best practices for login, registration, and 2FA.">
+    <meta property="og:image" content="https://www.yourdomain.com/images/auth-preview.jpg"> <!-- TODO: Replace with a relevant preview image -->
+
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://www.yourdomain.com/auth-portal"> <!-- TODO: Replace with your actual URL -->
+    <meta property="twitter:title" content="Secure Auth Portal - Login & Register">
+    <meta property="twitter:description" content="A secure and modern authentication portal demonstrating best practices for login, registration, and 2FA.">
+    <meta property="twitter:image" content="https://www.yourdomain.com/images/auth-preview.jpg"> <!-- TODO: Replace with a relevant preview image -->
+
+    <!-- Favicon for better branding (using a brain emoji for "smart" auth) -->
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext x='50%25' y='50%25' font-size='90' text-anchor='middle' dominant-baseline='central'%3E🔐%3C/text%3E%3C/svg%3E">
+</head>
+<body>
+   <div class="auth-wrapper">
+  <h1 class="portal-title">Secure Auth Portal</h1>
+
+  <div class="auth-card" id="auth-card">
+    <!-- Header Tabs -->
+    <div class="auth-header" *ngIf="!show2FA">
+      <button 
+        type="button" 
+        class="auth-tab" 
+        [class.active]="activeTab === 'login'" 
+        (click)="switchTab('login')">
+        Login
+      </button>
+
+      <button 
+        type="button" 
+        class="auth-tab" 
+        [class.active]="activeTab === 'register'" 
+        (click)="switchTab('register')">
+        Register
+      </button>
+    </div>
+
+    <!-- Login Form -->
+    <form *ngIf="activeTab === 'login' && !show2FA" class="auth-form active" (ngSubmit)="onLogin()">
+      <h2>Welcome Back!</h2>
+      <div class="form-group">
+        <label for="login-email">Email:</label>
+        <input type="email" id="login-email" name="email" [(ngModel)]="loginModel.emailId" required autocomplete="email" />
+      </div>
+      
+      <div class="form-group password-group">
+        <label for="login-password">Password:</label>
+        <input [type]="showPasswordText ? 'text' : 'password'" id="login-password" name="password" [(ngModel)]="loginModel.password" required autocomplete="current-password" />
+        <span class="password-toggle" (click)="togglePasswordVisibility()" role="button" aria-label="Show password">
+          <i class="far" [ngClass]="showPasswordText ? 'fa-eye-slash' : 'fa-eye'"></i>
+        </span>
+      </div>
+
+      <div class="form-group checkbox-group">
+        <input type="checkbox" id="remember-me" name="remember-me" [(ngModel)]="loginModel.rememberMe" />
+        <label for="remember-me">Remember me</label>
+      </div>
+
+      <button type="submit" class="submit-btn" [disabled]="isLoading">
+        <span class="btn-text" *ngIf="!isLoading">Login</span>
+        <span class="spinner" *ngIf="isLoading"><i class="fas fa-spinner fa-spin"></i></span>
+      </button>
+      <a href="#" id="forgot-password" class="auth-link">Forgot Password?</a>
+    </form>
+
+    <!-- Register Form -->
+<form *ngIf="activeTab === 'register' && !show2FA" class="auth-form active" (ngSubmit)="onRegister()">
+  <h2>Create Account</h2>
+
+  <!-- Full Name (fullName) -->
+  <div class="form-group">
+    <label for="register-fullName">Full Name:</label>
+    <input type="text" id="register-fullName" name="fullName" [(ngModel)]="registerModel.fullName" required autocomplete="name" placeholder="John Doe" />
+  </div>
+
+  <!-- Email (emailId) -->
+  <div class="form-group">
+    <label for="register-email">Email:</label>
+    <input type="email" id="register-email" name="emailId" [(ngModel)]="registerModel.emailId" required autocomplete="email" placeholder="example@domain.com" />
+  </div>
+
+  <!-- Mobile Number with ngx-intl-tel-input (mobileNo) -->
+  <div class="form-group">
+    <label for="register-mobile">Mobile Number:</label>
+    <ngx-intl-tel-input
+      [cssClass]="'custom-tel-input'"
+      [preferredCountries]="['ke', 'tz', 'ug', 'rw']"
+      [enableAutoSelectCountry]="true"
+      [enablePlaceholder]="true"
+      [searchCountryFlag]="true"
+      [searchCountryField]="['iso2', 'name']"
+      [selectFirstCountry]="false"
+      [selectedCountryISO]="'ke'"
+      [maxLength]="15"
+      [phoneValidation]="true"
+      [separateDialCode]="true"
+      name="mobileNo"
+      [(ngModel)]="registerModel.mobileNo">
+    </ngx-intl-tel-input>
+  </div>
+
+  <!-- Role Selection (role) -->
+  <div class="form-group">
+    <label for="register-role">Role:</label>
+    <select id="register-role" name="role" [(ngModel)]="registerModel.role" class="styled-select" required>
+      <option value="" disabled selected>Select a role</option>
+      <option value="Admin">Admin</option>
+      <option value="Forest Manager">Forest Manager</option>
+      <option value="Ranger">Ranger</option>
+      <option value="Ecologist">Ecologist / Researcher</option>
+      <option value="Conservation Officer">Conservation Officer</option>
+      <option value="GIS Specialist">GIS Mapping Specialist</option>
+      <option value="Driver">Driver</option>
+      <option value="Cleaner">Cleaner / Field Worker</option>
+    </select>
+  </div>
+
+  <!-- Password (password) -->
+  <div class="form-group password-group">
+    <label for="register-password">Password:</label>
+    <div class="input-wrapper">
+      <input [type]="showPasswordText ? 'text' : 'password'" id="register-password" name="password" [(ngModel)]="registerModel.password" (input)="updatePasswordStrength()" required autocomplete="new-password" />
+      <span class="password-toggle" (click)="togglePasswordVisibility()" role="button" aria-label="Toggle password visibility">
+        <i class="far" [ngClass]="showPasswordText ? 'fa-eye-slash' : 'fa-eye'"></i>
+      </span>
+    </div>
+    <p class="strength-text" [style.color]="passwordStrengthColor">{{ passwordStrengthText }}</p>
+  </div>
+
+  <!-- Confirm Password -->
+  <div class="form-group password-group">
+    <label for="register-confirm-password">Confirm Password:</label>
+    <div class="input-wrapper">
+      <input [type]="showConfirmPasswordText ? 'text' : 'password'" id="register-confirm-password" name="confirmPassword" [(ngModel)]="registerModel.confirmPassword" required autocomplete="new-password" />
+      <span class="password-toggle" (click)="toggleConfirmPasswordVisibility()" role="button" aria-label="Toggle confirm password visibility">
+        <i class="far" [ngClass]="showConfirmPasswordText ? 'fa-eye-slash' : 'fa-eye'"></i>
+      </span>
+    </div>
+  </div>
+
+  <button type="submit" class="submit-btn" [disabled]="isLoading">
+    <span class="btn-text" *ngIf="!isLoading">Register</span>
+    <span class="spinner" *ngIf="isLoading"><i class="fas fa-spinner fa-spin"></i></span>
+  </button>
+</form>
+    <!-- 2FA Form -->
+    <form *ngIf="show2FA" class="auth-form active" (ngSubmit)="onVerify2FA()">
+      <h2>Two-Factor Authentication</h2>
+      <p class="twofa-info">A verification code has been sent to your registered device/email.</p>
+      <div class="form-group">
+        <label for="twofa-code">Verification Code:</label>
+        <input type="text" id="twofa-code" name="twofaCode" [(ngModel)]="twoFaModel.code" required inputmode="numeric" pattern="[0-9]{6}" maxlength="6" />
+      </div>
+      <button type="submit" class="submit-btn" [disabled]="isLoading">
+        <span class="btn-text" *ngIf="!isLoading">Verify Code</span>
+        <span class="spinner" *ngIf="isLoading"><i class="fas fa-spinner fa-spin"></i></span>
+      </button>
+      <button type="button" class="resend-code-btn">Resend Code</button>
+    </form>
+  </div>
+
+  <footer class="app-footer">
+    <p>&copy; 2026 KarthikCodingSolutions. All rights reserved.</p>
+  </footer>
+</div>
+    <script src="script.js"></script>
+</body>
+</html>
