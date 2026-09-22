@@ -14,7 +14,6 @@ namespace dotnet_backend.Models
 
         public DbSet<User> Users { get; set; }
     }
-}
 
     
 
@@ -24,4 +23,4 @@ namespace dotnet_backend.Models
 //  for new user registration).
 
 //ISSUE ALL ALONG: The error CS0101 means duplicate class definitions. Before we put User and UserLogin inside Models/UserDbContext.cs.
-// However, you also have standalone Models/User.cs and Models/UserLogin.cs files in your project directory. Because both files define the same class in dotnet_backend.Models, C# is throwing a build conflict.
+//  However, you also have standalone Models/User.cs and Models/UserLogin.cs files in your project directory. Because both files define the same class in dotnet_backend.Models, C# is throwing a build conflict.

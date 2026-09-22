@@ -14,7 +14,7 @@ namespace dotnet_backend.Models
 
         public DbSet<User> Users { get; set; }
     }
-}
+    
 
     
 
