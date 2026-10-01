@@ -103,5 +103,4 @@ public class UserController : ControllerBase
         _context.SaveChanges();
         return NoContent();
     }
-    
 }

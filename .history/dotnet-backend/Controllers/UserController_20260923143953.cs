@@ -47,7 +47,7 @@ public class UserController : ControllerBase
             return Unauthorized("Invalid email or password");
         }
 
-        return Ok(user);
+        return Ok(user, "S");
     }
 
     // 3. Get All Users Endpoint
@@ -103,5 +103,4 @@ public class UserController : ControllerBase
         _context.SaveChanges();
         return NoContent();
     }
-    
 }

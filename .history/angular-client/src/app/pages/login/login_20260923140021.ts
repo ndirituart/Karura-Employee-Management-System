@@ -35,7 +35,7 @@ export class Login {
   private readonly http = inject(HttpClient);
 
   // --- API Endpoint Base URL ---
-  private readonly apiUrl = 'http://localhost:5251/api/User';
+  private readonly apiUrl = 'https://localhost:7000/api/User';
 
   // --- Form View State ---
   activeTab: 'login' | 'register' = 'login';
@@ -117,7 +117,7 @@ export class Login {
     this.isLoading = true;
     this.notification.showLoading('Creating your account...');
 
-    //this is the object that registers the user(s)
+    
     const payload = {
       userId: 0,
       fullName: this.registerModel.fullName,
