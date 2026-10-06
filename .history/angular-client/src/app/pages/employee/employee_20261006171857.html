@@ -192,53 +192,14 @@
       <!-- ============ Actions ============ -->
       <div class="form-actions">
         <button type="button" class="btn btn-secondary" (click)="onReset()" [disabled]="saving">Reset</button>
-        <button type="submit" class="btn btn-primary"  [disabled]="saving || employeeForm.invalid">
-          {{ saving ? 'Creating…' : 'Create Employee' }}
-        </button>
+      <button type="submit" class="btn btn-primary"  [disabled]="saving || employeeForm.invalid">
+        {{ saving ? 'Creating…' : 'Create Employee' }}
+      </button>
       </div>
 
       <div id="formMessage" class="form-message" role="status" hidden></div>
     </form>
   </main>
-
-  <h3>Employee List</h3>
-
-  <div *ngIf="loading" class="loading">Loading employees…</div>
-
-  <div class="employee-table-wrapper" *ngIf="!loading">
-    <table class="employee-table">
-      <thead>
-        <tr>
-          <th>Employee ID</th>
-          <th>Employee Name</th>
-          <th>Client Name</th>
-          <th>Start Date</th>
-          <th>Lead By Employee</th>
-          <th>Contact Person</th>
-          <th>Contact No</th>
-          <th>Actions</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr *ngFor="let p of employees">
-          <td>{{ p.id }}</td>
-          <td>{{ p.employeeName }}</td>
-          <td>{{ p.clientName }}</td>
-          <td>{{ p.startDate | date:'mediumDate' }}</td>
-          <td>{{ p.leadByEmpId }}</td>
-          <td>{{ p.contactPerson }}</td>
-          <td>{{ p.contactNoEmployee }}</td>
-          <td class="actions">
-            <button type="button" class="btn btn-secondary btn-sm" (click)="editEmployee(p)">Edit</button>
-            <button type="button" class="btn btn-danger btn-sm"    (click)="deleteEmployee(p.id)">Delete</button>
-          </td>
-        </tr>
-        <tr *ngIf="employees.length === 0">
-          <td colspan="8" class="empty-state">No employees yet. Create one above.</td>
-        </tr>
-      </tbody>
-    </table>
-  </div>
 
   <script src="employee.js"></script>
 </body>

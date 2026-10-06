@@ -4,23 +4,23 @@
 
 :host {
   display: block;
-  --kf-green:      #2e7d32;
-  --kf-green-dark: #1b5e20;
-  --kf-green-soft: #e8f5e9;
-  --kf-border:     #e2e8e3;
-  --kf-text:       #1a331e;
-  --kf-muted:      #6b7a6d;
-  --kf-bg:         #f7faf7;
-  --kf-radius:     8px;
-  --kf-shadow:     0 2px 8px rgba(0, 0, 0, 0.06);
+  --primary-color:      #2e7d32;
+  --primary-dark: #1b5e20;
+  --card-background: #e8f5e9;
+  --border-color:     #e2e8e3;
+ --text-color-dark:       #1a331e;
+ --text-color-light:      #6b7a6d;
+  --background-color:         #f7faf7;
+  --border-radius:     8px;
+  --shadow:     0 2px 8px rgba(0, 0, 0, 0.06);
 }
 
 .project-page {
   max-width: 1100px;
   margin: 32px auto;
   padding: 0 20px;
-  color: var(--kf-text);
-  font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  color: var(--text-color-dark);
+  --font-family: 'Poppins', 'Segoe UI', sans-serif;
 }
 
 /* ---------- Header ---------- */
@@ -28,16 +28,16 @@
 .project-page h2 {
   font-size: 1.6rem;
   font-weight: 700;
-  color: var(--kf-green-dark);
+  color: var(--primary-dark);
   margin: 0 0 20px;
   padding-bottom: 10px;
-  border-bottom: 2px solid var(--kf-green-soft);
+  border-bottom: 2px solid var(--card-background);
 }
 
 .project-page h3 {
   font-size: 1.2rem;
   font-weight: 600;
-  color: var(--kf-text);
+  color: var(--text-color-dark);
   margin: 32px 0 12px;
 }
 
@@ -45,9 +45,9 @@
 
 .project-form {
   background: #ffffff;
-  border: 1px solid var(--kf-border);
-  border-radius: var(--kf-radius);
-  box-shadow: var(--kf-shadow);
+  border: 1px solid var(--border-color);
+  border-radius: var(--border-radius);
+  box-shadow: var(--shadow);
   padding: 24px 28px;
   margin-bottom: 28px;
 }
@@ -85,9 +85,9 @@
   width: 100%;
   padding: 10px 12px;
   font-size: 0.95rem;
-  color: var(--kf-text);
-  background: var(--kf-bg);
-  border: 1px solid var(--kf-border);
+  color: var(--text-color-dark);
+  background: var(--background-color);
+  border: 1px solid var(--border-color);
   border-radius: 6px;
   outline: none;
   transition: border-color 0.15s, box-shadow 0.15s, background 0.15s;
@@ -97,13 +97,13 @@
 .project-form select:focus,
 .project-form textarea:focus {
   background: #ffffff;
-  border-color: var(--kf-green);
+  border-color: var(--primary-color);
   box-shadow: 0 0 0 3px rgba(46, 125, 50, 0.15);
 }
 
 .project-form input.ng-invalid.ng-touched,
 .project-form select.ng-invalid.ng-touched {
-  border-color: #d32f2f;
+  --border-color: #e0e6e0;
   background: #fdecea;
 }
 
@@ -138,24 +138,24 @@
 }
 
 .btn-primary {
-  background: var(--kf-green);
+  background: var(--primary-color);
   color: #ffffff;
 }
 
 .btn-primary:hover:not(:disabled) {
-  background: var(--kf-green-dark);
+  background: var(--primary-dark);
   box-shadow: 0 4px 10px rgba(46, 125, 50, 0.25);
 }
 
 .btn-secondary {
   background: #ffffff;
-  color: var(--kf-text);
-  border-color: var(--kf-border);
+  color: var(--text-color-dark);
+  border-color: var(--border-color);
 }
 
 .btn-secondary:hover:not(:disabled) {
-  background: var(--kf-green-soft);
-  border-color: var(--kf-green);
+  background: var(--card-background);
+  border-color: var(--primary-color);
 }
 
 .btn-danger {
@@ -183,9 +183,9 @@
 .project-table-wrapper {
   overflow-x: auto;
   background: #ffffff;
-  border: 1px solid var(--kf-border);
-  border-radius: var(--kf-radius);
-  box-shadow: var(--kf-shadow);
+  border: 1px solid var(--border-color);
+  border-radius: var(--border-radius);
+  box-shadow: var(--shadow);
 }
 
 .project-table {
@@ -195,25 +195,25 @@
 }
 
 .project-table thead {
-  background: var(--kf-green-soft);
+  background: var(--card-background);
 }
 
 .project-table th {
   text-align: left;
   padding: 12px 14px;
   font-weight: 700;
-  color: var(--kf-green-dark);
+  color: var(--primary-dark);
   font-size: 0.8rem;
   text-transform: uppercase;
   letter-spacing: 0.04em;
-  border-bottom: 1px solid var(--kf-border);
+  border-bottom: 1px solid var(--border-color);
   white-space: nowrap;
 }
 
 .project-table td {
   padding: 12px 14px;
-  border-bottom: 1px solid var(--kf-border);
-  color: var(--kf-text);
+  border-bottom: 1px solid var(--border-color);
+  color: var(--text-color-dark);
   vertical-align: middle;
 }
 
@@ -255,12 +255,12 @@
 
 .alert-error {
   background: #fdecea;
-  color: #b71c1c;
+#dc3545;
   border: 1px solid #f5c6cb;
 }
 
 .alert-success {
-  background: var(--kf-green-soft);
-  color: var(--kf-green-dark);
+  background: var(--card-background);
+  color: var(--primary-dark);
   border: 1px solid #c8e6c9;
 }

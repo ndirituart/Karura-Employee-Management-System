@@ -19,14 +19,14 @@
 
     <form id="employeeForm" class="employee-form" novalidate>
      <div *ngIf="successMessage" class="alert alert-success">{{ successMessage }}</div>
-     <div *ngIf="errorMessage"   class="alert alert-error">{{ errorMessage }}</div>
+  n <div *ngIf="errorMessage"   class="alert alert-error">{{ errorMessage }}</div>
 
       <!-- ============ Section 1: Link to existing user ============ -->
       <section class="form-section">
         <h2 class="section-title">Account Link</h2>
 
         <div class="grid grid-2">
-           <div class="row">
+          <div class="field">
             <label for="userId">User ID <span class="required">*</span></label>
             <div class="input-with-status">
               <input
@@ -45,7 +45,7 @@
             <span id="userIdError" class="field-error" role="alert"></span>
           </div>
 
-           <div class="row">
+          <div class="field">
             <label for="role">Role <span class="required">*</span></label>
             <select id="role" name="role" required>
               <option value="" disabled selected>— Select a role —</option>
@@ -65,37 +65,37 @@
         <h2 class="section-title">Personal Details</h2>
 
         <div class="grid grid-2">
-           <div class="row">
+          <div class="field">
             <label for="firstName">First Name <span class="required">*</span></label>
             <input id="firstName" name="firstName" type="text" required maxlength="80">
             <span id="firstNameError" class="field-error" role="alert"></span>
           </div>
 
-           <div class="row">
+          <div class="field">
             <label for="lastName">Last Name <span class="required">*</span></label>
             <input id="lastName" name="lastName" type="text" required maxlength="80">
             <span id="lastNameError" class="field-error" role="alert"></span>
           </div>
 
-           <div class="row">
+          <div class="field">
             <label for="email">Email <span class="required">*</span></label>
             <input id="email" name="email" type="email" required maxlength="150">
             <span id="emailError" class="field-error" role="alert"></span>
           </div>
 
-           <div class="row">
+          <div class="field">
             <label for="phoneNumber">Phone Number</label>
             <input id="phoneNumber" name="phoneNumber" type="tel"
                    placeholder="+254 7XX XXX XXX" maxlength="20">
             <span id="phoneNumberError" class="field-error" role="alert"></span>
           </div>
 
-           <div class="row">
+          <div class="field">
             <label for="dateOfBirth">Date of Birth</label>
             <input id="dateOfBirth" name="dateOfBirth" type="date">
           </div>
 
-           <div class="row">
+          <div class="field">
             <label for="gender">Gender</label>
             <select id="gender" name="gender">
               <option value="">— Select —</option>
@@ -113,7 +113,7 @@
         <h2 class="section-title">Employment Details</h2>
 
         <div class="grid grid-2">
-           <div class="row">
+          <div class="field">
             <label for="department">Department <span class="required">*</span></label>
             <select id="department" name="department" required>
               <option value="" disabled selected>— Select department —</option>
@@ -127,19 +127,19 @@
             <span id="departmentError" class="field-error" role="alert"></span>
           </div>
 
-           <div class="row">
+          <div class="field">
             <label for="jobTitle">Job Title <span class="required">*</span></label>
             <input id="jobTitle" name="jobTitle" type="text" required maxlength="120">
             <span id="jobTitleError" class="field-error" role="alert"></span>
           </div>
 
-           <div class="row">
+          <div class="field">
             <label for="hireDate">Hire Date <span class="required">*</span></label>
             <input id="hireDate" name="hireDate" type="date" required>
             <span id="hireDateError" class="field-error" role="alert"></span>
           </div>
 
-           <div class="row">
+          <div class="field">
             <label for="employmentType">Employment Type</label>
             <select id="employmentType" name="employmentType">
               <option value="">— Select —</option>
@@ -150,13 +150,13 @@
             </select>
           </div>
 
-           <div class="row">
+          <div class="field">
             <label for="salary">Monthly Salary (KES)</label>
             <input id="salary" name="salary" type="number" min="0" step="0.01"
                    placeholder="e.g. 85000">
           </div>
 
-           <div class="row">
+          <div class="field">
             <label for="status">Status</label>
             <select id="status" name="status">
               <option value="Active" selected>Active</option>
@@ -173,11 +173,11 @@
         <h2 class="section-title">Address</h2>
 
         <div class="grid grid-2">
-           <div class="row">
+          <div class="field">
             <label for="county">County</label>
             <input id="county" name="county" type="text" maxlength="60">
           </div>
-           <div class="row">
+          <div class="field">
             <label for="town">Town / City</label>
             <input id="town" name="town" type="text" maxlength="60">
           </div>
@@ -191,54 +191,16 @@
 
       <!-- ============ Actions ============ -->
       <div class="form-actions">
-        <button type="button" class="btn btn-secondary" (click)="onReset()" [disabled]="saving">Reset</button>
-        <button type="submit" class="btn btn-primary"  [disabled]="saving || employeeForm.invalid">
-          {{ saving ? 'Creating…' : 'Create Employee' }}
+        <button type="button" id="resetBtn" class="btn btn-secondary">Reset</button>
+        <button type="submit" id="submitBtn" class="btn btn-primary">
+          <span class="btn-label">Create Employee</span>
+          <span class="btn-spinner" hidden></span>
         </button>
       </div>
 
       <div id="formMessage" class="form-message" role="status" hidden></div>
     </form>
   </main>
-
-  <h3>Employee List</h3>
-
-  <div *ngIf="loading" class="loading">Loading employees…</div>
-
-  <div class="employee-table-wrapper" *ngIf="!loading">
-    <table class="employee-table">
-      <thead>
-        <tr>
-          <th>Employee ID</th>
-          <th>Employee Name</th>
-          <th>Client Name</th>
-          <th>Start Date</th>
-          <th>Lead By Employee</th>
-          <th>Contact Person</th>
-          <th>Contact No</th>
-          <th>Actions</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr *ngFor="let p of employees">
-          <td>{{ p.id }}</td>
-          <td>{{ p.employeeName }}</td>
-          <td>{{ p.clientName }}</td>
-          <td>{{ p.startDate | date:'mediumDate' }}</td>
-          <td>{{ p.leadByEmpId }}</td>
-          <td>{{ p.contactPerson }}</td>
-          <td>{{ p.contactNoEmployee }}</td>
-          <td class="actions">
-            <button type="button" class="btn btn-secondary btn-sm" (click)="editEmployee(p)">Edit</button>
-            <button type="button" class="btn btn-danger btn-sm"    (click)="deleteEmployee(p.id)">Delete</button>
-          </td>
-        </tr>
-        <tr *ngIf="employees.length === 0">
-          <td colspan="8" class="empty-state">No employees yet. Create one above.</td>
-        </tr>
-      </tbody>
-    </table>
-  </div>
 
   <script src="employee.js"></script>
 </body>

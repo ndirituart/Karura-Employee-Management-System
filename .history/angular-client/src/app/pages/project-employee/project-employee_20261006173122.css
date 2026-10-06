@@ -1,0 +1,19 @@
+/* General Styling & Theme Variables */
+:root {
+    --primary-color: #29742f;        /* Main Karura Green */
+    --primary-dark: #1b5e20;         /* Darker Green for hover */
+    --secondary-color: #2e7d32;      /* Secondary Green for links */
+    --background-color: #f4f6f4;
+    --card-background: #ffffff;
+    --text-color-dark: #1b381e;       /* Forest Dark Text */
+    --text-color-light: #4f6e52;      /* Soft Green-Gray Text */
+    --border-color: #e0e6e0;
+    --error-color: #dc3545;           /* Red */
+    --success-color: #28a745;         /* Success Green */
+    --warning-color: #ffc107;
+    --info-color: #17a2b8;
+
+    --font-family: 'Poppins', 'Segoe UI', sans-serif;
+    --shadow: 0 8px 25px rgba(41, 116, 47, 0.12);
+    --border-radius: 8px;
+}

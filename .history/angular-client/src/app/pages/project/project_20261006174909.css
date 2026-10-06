@@ -1,45 +1,47 @@
 /* ============================================================
-   Project-Employee page — Karura theme
+   Project page — Karura green theme
    ============================================================ */
 
+/* General Styling & Theme Variables */
 :root {
-  --primary-color: #29742f;
-  --primary-dark:  #1b5e20;
-  --secondary-color: #2e7d32;
-  --background-color: #f4f6f4;
-  --card-background: #ffffff;
-  --text-color-dark:  #1b381e;
-  --text-color-light: #4f6e52;
-  --border-color: #e0e6e0;
-  --error-color: #dc3545;
-  --success-color: #28a745;
-  --warning-color: #ffc107;
-  --info-color: #17a2b8;
+    --primary-color: #29742f;        /* Main Karura Green */
+    --primary-dark: #1b5e20;         /* Darker Green for hover */
+    --secondary-color: #2e7d32;      /* Secondary Green for links */
+    --background-color: #f4f6f4;
+    --card-background: #ffffff;
+    --text-color-dark: #1b381e;       /* Forest Dark Text */
+    --text-color-light: #4f6e52;      /* Soft Green-Gray Text */
+    --border-color: #e0e6e0;
+    --error-color: #dc3545;           /* Red */
+    --success-color: #28a745;         /* Success Green */
+    --warning-color: #ffc107;
+    --info-color: #17a2b8;
 
-  --font-family: 'Poppins', 'Segoe UI', sans-serif;
-  --shadow: 0 8px 25px rgba(41, 116, 47, 0.12);
-  --border-radius: 8px;
+    --font-family: 'Poppins', 'Segoe UI', sans-serif;
+    --shadow: 0 8px 25px rgba(41, 116, 47, 0.12);
+    --border-radius: 8px;
 }
 
-.pe-page {
+.project-page {
   max-width: 1100px;
   margin: 32px auto;
   padding: 0 20px;
   color: var(--text-color-dark);
-  font-family: var(--font-family);
+  --font-family: 'Poppins', 'Segoe UI', sans-serif;
 }
 
-.pe-page h2 {
+/* ---------- Header ---------- */
+
+.project-page h2 {
   font-size: 1.6rem;
   font-weight: 700;
   color: var(--primary-dark);
   margin: 0 0 20px;
   padding-bottom: 10px;
-  border-bottom: 2px solid var(--primary-color);
-  opacity: 0.9;
+  border-bottom: 2px solid var(--card-background);
 }
 
-.pe-page h3 {
+.project-page h3 {
   font-size: 1.2rem;
   font-weight: 600;
   color: var(--text-color-dark);
@@ -48,8 +50,8 @@
 
 /* ---------- Form card ---------- */
 
-.pe-form {
-  background: var(--card-background);
+.project-form {
+  background: #ffffff;
   border: 1px solid var(--border-color);
   border-radius: var(--border-radius);
   box-shadow: var(--shadow);
@@ -57,7 +59,7 @@
   margin-bottom: 28px;
 }
 
-.pe-form .row {
+.project-form .row {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 16px 24px;
@@ -65,15 +67,17 @@
 }
 
 @media (max-width: 640px) {
-  .pe-form .row { grid-template-columns: 1fr; }
+  .project-form .row {
+    grid-template-columns: 1fr;
+  }
 }
 
-.pe-form .field {
+.project-form .field {
   display: flex;
   flex-direction: column;
 }
 
-.pe-form label {
+.project-form label {
   font-size: 0.85rem;
   font-weight: 600;
   color: var(--text-color-light);
@@ -82,14 +86,9 @@
   letter-spacing: 0.03em;
 }
 
-.pe-form .required {
-  color: var(--error-color);
-  margin-left: 2px;
-}
-
-.pe-form input,
-.pe-form select,
-.pe-form textarea {
+.project-form input,
+.project-form select,
+.project-form textarea {
   width: 100%;
   padding: 10px 12px;
   font-size: 0.95rem;
@@ -98,26 +97,25 @@
   border: 1px solid var(--border-color);
   border-radius: 6px;
   outline: none;
-  font-family: var(--font-family);
   transition: border-color 0.15s, box-shadow 0.15s, background 0.15s;
 }
 
-.pe-form input:focus,
-.pe-form select:focus,
-.pe-form textarea:focus {
-  background: var(--card-background);
+.project-form input:focus,
+.project-form select:focus,
+.project-form textarea:focus {
+  background: #ffffff;
   border-color: var(--primary-color);
-  box-shadow: 0 0 0 3px rgba(41, 116, 47, 0.15);
+  box-shadow: 0 0 0 3px rgba(46, 125, 50, 0.15);
 }
 
-.pe-form input.ng-invalid.ng-touched,
-.pe-form select.ng-invalid.ng-touched {
-  border-color: var(--error-color);
+.project-form input.ng-invalid.ng-touched,
+.project-form select.ng-invalid.ng-touched {
+  --border-color: #e0e6e0;
   background: #fdecea;
 }
 
 .field-error {
-  color: var(--error-color);
+  color: #d32f2f;
   font-size: 0.78rem;
   margin-top: 4px;
 }
@@ -134,12 +132,17 @@
   border: 1px solid transparent;
   border-radius: 6px;
   cursor: pointer;
-  font-family: var(--font-family);
   transition: background 0.15s, transform 0.05s, box-shadow 0.15s;
 }
 
-.btn:active { transform: translateY(1px); }
-.btn:disabled { opacity: 0.55; cursor: not-allowed; }
+.btn:active {
+  transform: translateY(1px);
+}
+
+.btn:disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+}
 
 .btn-primary {
   background: var(--primary-color);
@@ -148,22 +151,22 @@
 
 .btn-primary:hover:not(:disabled) {
   background: var(--primary-dark);
-  box-shadow: 0 4px 10px rgba(41, 116, 47, 0.25);
+  box-shadow: 0 4px 10px rgba(46, 125, 50, 0.25);
 }
 
 .btn-secondary {
-  background: var(--card-background);
+  background: #ffffff;
   color: var(--text-color-dark);
   border-color: var(--border-color);
 }
 
 .btn-secondary:hover:not(:disabled) {
-  background: #eaf5ea;
+  background: var(--card-background);
   border-color: var(--primary-color);
 }
 
 .btn-danger {
-  background: var(--error-color);
+  background: #d32f2f;
   color: #ffffff;
 }
 
@@ -184,25 +187,25 @@
 
 /* ---------- Table ---------- */
 
-.pe-table-wrapper {
+.project-table-wrapper {
   overflow-x: auto;
-  background: var(--card-background);
+  background: #ffffff;
   border: 1px solid var(--border-color);
   border-radius: var(--border-radius);
   box-shadow: var(--shadow);
 }
 
-.pe-table {
+.project-table {
   width: 100%;
   border-collapse: collapse;
   font-size: 0.9rem;
 }
 
-.pe-table thead {
-  background: #eaf5ea;
+.project-table thead {
+  background: var(--card-background);
 }
 
-.pe-table th {
+.project-table th {
   text-align: left;
   padding: 12px 14px;
   font-weight: 700;
@@ -214,58 +217,40 @@
   white-space: nowrap;
 }
 
-.pe-table td {
+.project-table td {
   padding: 12px 14px;
   border-bottom: 1px solid var(--border-color);
   color: var(--text-color-dark);
   vertical-align: middle;
 }
 
-.pe-table tbody tr:hover { background: #f4faf4; }
+.project-table tbody tr:hover {
+  background: #f4faf4;
+}
 
-.pe-table tbody tr:last-child td { border-bottom: none; }
+.project-table tbody tr:last-child td {
+  border-bottom: none;
+}
 
-.pe-table .actions {
+.project-table .actions {
   display: flex;
   gap: 8px;
   white-space: nowrap;
 }
 
-/* ---------- Badges ---------- */
-
-.badge {
-  display: inline-block;
-  padding: 3px 10px;
-  border-radius: 999px;
-  font-size: 0.75rem;
-  font-weight: 600;
-}
-
-.badge-active {
-  background: #e6f4ea;
-  color: var(--success-color);
-  border: 1px solid #b7e1c4;
-}
-
-.badge-inactive {
-  background: #fdecea;
-  color: var(--error-color);
-  border: 1px solid #f5c6cb;
-}
-
-/* ---------- Empty / loading / alerts ---------- */
-
 .empty-state {
   padding: 40px 20px;
   text-align: center;
-  color: var(--text-color-light);
+  color: var(--kf-muted);
   font-style: italic;
 }
+
+/* ---------- Misc ---------- */
 
 .loading {
   padding: 20px;
   text-align: center;
-  color: var(--text-color-light);
+  color: var(--kf-muted);
 }
 
 .alert {
@@ -277,12 +262,12 @@
 
 .alert-error {
   background: #fdecea;
-  color: #b71c1c;
+  color: var(-error-color);
   border: 1px solid #f5c6cb;
 }
 
 .alert-success {
-  background: #e6f4ea;
+  background: var(--card-background);
   color: var(--primary-dark);
   border: 1px solid #c8e6c9;
 }

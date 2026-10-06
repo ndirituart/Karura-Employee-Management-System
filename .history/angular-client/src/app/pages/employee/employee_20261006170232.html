@@ -1,0 +1,72 @@
+<section class="employee-page">
+  <h2>Create Employee</h2>
+
+  <div *ngIf="successMessage" class="alert alert-success">{{ successMessage }}</div>
+  <div *ngIf="errorMessage"   class="alert alert-error">{{ errorMessage }}</div>
+
+  <form class="employee-form" [formGroup]="employeeForm" (ngSubmit)="onSubmit()" novalidate>
+
+    <h3 class="section-title">Account Link</h3>
+
+    <div class="row">
+      <div class="field">
+        <label for="userId">User ID <span class="required">*</span></label>
+        <input id="userId" type="number" min="1" formControlName="userId" placeholder="e.g. 1024">
+        <span class="field-error" *ngIf="showError('userId')">
+          <ng-container *ngIf="f['userId'].errors?.['required']">User ID is required.</ng-container>
+          <ng-container *ngIf="f['userId'].errors?.['min']">User ID must be positive.</ng-container>
+        </span>
+      </div>
+
+      <div class="field">
+        <label for="role">Role <span class="required">*</span></label>
+        <select id="role" formControlName="role">
+          <option value="" disabled>— Select a role —</option>
+          <option *ngFor="let r of roles" [value]="r">{{ r }}</option>
+        </select>
+        <span class="field-error" *ngIf="showError('role')">Please select a role.</span>
+      </div>
+    </div>
+
+    <h3 class="section-title">Personal Details</h3>
+
+    <div class="row">
+      <!-- firstName, lastName -->
+    </div>
+    <div class="row">
+      <!-- email, phoneNumber -->
+    </div>
+    <div class="row">
+      <!-- dateOfBirth, gender -->
+    </div>
+
+    <h3 class="section-title">Employment Details</h3>
+
+    <div class="row">
+      <!-- department, jobTitle -->
+    </div>
+    <div class="row">
+      <!-- hireDate, employmentType -->
+    </div>
+    <div class="row">
+      <!-- salary, status -->
+    </div>
+
+    <h3 class="section-title">Address</h3>
+
+    <div class="row">
+      <!-- county, town -->
+    </div>
+    <div class="row-full">
+      <!-- postalAddress -->
+    </div>
+
+    <div class="form-actions">
+      <button type="button" class="btn btn-secondary" (click)="onReset()" [disabled]="saving">Reset</button>
+      <button type="submit" class="btn btn-primary"  [disabled]="saving || employeeForm.invalid">
+        <span>{{ saving ? 'Creating…' : 'Create Employee' }}</span>
+        <span class="btn-spinner" *ngIf="saving"></span>
+      </button>
+    </div>
+  </form>
+</section>

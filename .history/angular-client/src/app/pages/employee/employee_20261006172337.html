@@ -220,7 +220,7 @@
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let p of employees">
+        <tr *ngFor="let p of employees; trackBy: trackById">
           <td>{{ p.id }}</td>
           <td>{{ p.employeeName }}</td>
           <td>{{ p.clientName }}</td>

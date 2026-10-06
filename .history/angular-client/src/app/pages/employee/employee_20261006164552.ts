@@ -1,28 +1,25 @@
+// 1. ALL imports first, at the top. Nothing else before them.
 import { CommonModule } from '@angular/common';
-import { Component, OnInit, TrackByFunction } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import {
   FormBuilder,
   FormGroup,
   ReactiveFormsModule,
   Validators
 } from '@angular/forms';
-import { CreateEmployeeDto, EmployeeService } from '../../services/employee.service';
+import { CreateEmployeeDto, EmployeeService } from './employee.service';
 
+// 2. The decorator goes immediately above the class, at top level.
 @Component({
   selector: 'app-employee',
   standalone: true,
   imports: [CommonModule, ReactiveFormsModule],
-  providers: [EmployeeService],
   templateUrl: './employee.html',
   styleUrls: ['./employee.css']
 })
+
+// 3. Then the class.
 export class Employee implements OnInit {
-deleteEmployee(arg0: any) {
-throw new Error('Method not implemented.');
-}
-editEmployee(_t209: any) {
-throw new Error('Method not implemented.');
-}
   employeeForm!: FormGroup;
   saving = false;
   successMessage: string | null = null;
@@ -36,9 +33,6 @@ throw new Error('Method not implemented.');
   readonly genders = ['Male', 'Female', 'Other', 'Prefer not to say'];
   readonly employmentTypes = ['Permanent', 'Contract', 'Casual', 'Internship'];
   readonly statuses = ['Active', 'On Leave', 'Suspended', 'Terminated'];
-loading: any;
-employees: any;
-trackById: TrackByFunction<any> | undefined;
 
   constructor(
     private fb: FormBuilder,

@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, OnInit, TrackByFunction } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import {
   FormBuilder,
   FormGroup,
@@ -17,12 +17,6 @@ import { CreateEmployeeDto, EmployeeService } from '../../services/employee.serv
   styleUrls: ['./employee.css']
 })
 export class Employee implements OnInit {
-deleteEmployee(arg0: any) {
-throw new Error('Method not implemented.');
-}
-editEmployee(_t209: any) {
-throw new Error('Method not implemented.');
-}
   employeeForm!: FormGroup;
   saving = false;
   successMessage: string | null = null;
@@ -36,9 +30,6 @@ throw new Error('Method not implemented.');
   readonly genders = ['Male', 'Female', 'Other', 'Prefer not to say'];
   readonly employmentTypes = ['Permanent', 'Contract', 'Casual', 'Internship'];
   readonly statuses = ['Active', 'On Leave', 'Suspended', 'Terminated'];
-loading: any;
-employees: any;
-trackById: TrackByFunction<any> | undefined;
 
   constructor(
     private fb: FormBuilder,
