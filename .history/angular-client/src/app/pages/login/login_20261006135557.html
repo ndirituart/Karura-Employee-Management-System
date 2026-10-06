@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Portal</title>
+
+    <meta name="description" content="A secure and modern authentication portal demonstrating best practices for login, registration, and 2FA.">
+    <meta name="keywords" content="authentication, login, signup, register, 2FA, security">
+    <meta name="author" content="Karthik">
+
+    <!-- FontAwesome CDN for Eye Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext x='50%25' y='50%25' font-size='90' text-anchor='middle' dominant-baseline='central'%3E🔐%3C/text%3E%3C/svg%3E">
+</head>
+<body>
+<div class="auth-wrapper">
+  <h1 class="portal-title">Secure Auth Portal</h1>
+
+  <div class="auth-card" id="auth-card">
+    <!-- Header Tabs -->
+    <div class="auth-header" *ngIf="!show2FA">
+      <button
+        type="button"
+        class="auth-tab"
+        [class.active]="activeTab === 'login'"
+        (click)="switchTab('login')">
+        Login
+      </button>
+
+      <button
+        type="button"
+        class="auth-tab"
+        [class.active]="activeTab === 'register'"
+        (click)="switchTab('register')">
+        Register
+      </button>
+    </div>
+
+    <!-- Login Form -->
+    <form *ngIf="activeTab === 'login' && !show2FA" class="auth-form active" (ngSubmit)="onLogin()">
+      <h2>Welcome Back!</h2>
+      <div class="form-group">
+        <label for="login-email">Email:</label>
+        <input type="email" id="login-email" name="email" [(ngModel)]="loginModel.emailId" required autocomplete="email" />
+      </div>
+
+      <div class="form-group password-group">
+        <label for="login-password">Password:</label>
+        <div class="input-wrapper">
+          <input [type]="showLoginPasswordText ? 'text' : 'password'" id="login-password" name="password" [(ngModel)]="loginModel.password" required autocomplete="current-password" />
+          <span class="password-toggle" (click)="toggleLoginPasswordVisibility()" role="button" aria-label="Show password">
+            <i class="far" [ngClass]="showLoginPasswordText ? 'fa-eye-slash' : 'fa-eye'"></i>
+          </span>
+        </div>
+      </div>
+
+      <div class="form-group checkbox-group">
+        <input type="checkbox" id="remember-me" name="remember-me" [(ngModel)]="loginModel.rememberMe" />
+        <label for="remember-me">Remember me</label>
+      </div>
+
+      <!-- Right: this calls the function when the button is clicked -->
+<button type="submit" (click)="onRegister()" class="submit-btn">
+        <span class="btn-text" *ngIf="!isLoading">Login</span>
+        <span class="spinner" *ngIf="isLoading"><i class="fas fa-spinner fa-spin"></i></span>
+      </button>
+      <a routerLink="#" id="forgot-password" class="auth-link">Forgot Password?</a>
+    </form>
+
+    <!-- Register Form -->
+    <form *ngIf="activeTab === 'register' && !show2FA" class="auth-form active" (ngSubmit)="onRegister()">
+      <h2>Create Account</h2>
+
+      <!-- Full Name -->
+      <div class="form-group">
+        <label for="register-fullName">Full Name:</label>
+        <input type="text" id="register-fullName" name="fullName" [(ngModel)]="registerModel.fullName" required autocomplete="name" placeholder="John Doe" />
+      </div>
+
+      <!-- Email -->
+      <div class="form-group">
+        <label for="register-email">Email:</label>
+        <input type="email" id="register-email" name="emailId" [(ngModel)]="registerModel.emailId" required autocomplete="email" placeholder="example@domain.com" />
+      </div>
+
+      <!-- Mobile Number -->
+      <div class="form-group">
+        <label for="register-mobile">Mobile Number:</label>
+        <input type="tel" id="register-mobile" name="mobileNo" [(ngModel)]="registerModel.mobileNo" placeholder="e.g. 0712345678" required />
+      </div>
+
+      <!-- Role Selection -->
+      <div class="form-group">
+        <label for="register-role">Role:</label>
+        <select id="register-role" name="role" [(ngModel)]="registerModel.role" class="styled-select" required>
+          <option value="" disabled selected>Select a role</option>
+          <option value="Admin">Admin</option>
+          <option value="Forest Manager">Forest Manager</option>
+          <option value="Ranger">Ranger</option>
+          <option value="Ecologist">Ecologist / Researcher</option>
+          <option value="Conservation Officer">Conservation Officer</option>
+          <option value="GIS Specialist">GIS Mapping Specialist</option>
+          <option value="Driver">Driver</option>
+          <option value="Cleaner">Cleaner / Field Worker</option>
+        </select>
+      </div>
+
+      <!-- Password -->
+      <div class="form-group password-group">
+        <label for="register-password">Password:</label>
+        <div class="input-wrapper">
+          <input [type]="showRegisterPasswordText ? 'text' : 'password'" id="register-password" name="password" [(ngModel)]="registerModel.password" (input)="updatePasswordStrength()" required autocomplete="new-password" />
+          <span class="password-toggle" (click)="toggleRegisterPasswordVisibility()" role="button" aria-label="Toggle password visibility">
+            <i class="far" [ngClass]="showRegisterPasswordText ? 'fa-eye-slash' : 'fa-eye'"></i>
+          </span>
+        </div>
+        <p class="strength-text" [style.color]="passwordStrengthColor">{{ passwordStrengthText }}</p>
+      </div>
+
+      <!-- Confirm Password -->
+      <div class="form-group password-group">
+        <label for="register-confirm-password">Confirm Password:</label>
+        <div class="input-wrapper">
+          <input [type]="showRegisterConfirmPasswordText ? 'text' : 'password'" id="register-confirm-password" name="confirmPassword" [(ngModel)]="registerModel.confirmPassword" required autocomplete="new-password" />
+          <span class="password-toggle" (click)="toggleRegisterConfirmPasswordVisibility()" role="button" aria-label="Toggle confirm password visibility">
+            <i class="far" [ngClass]="showRegisterConfirmPasswordText ? 'fa-eye-slash' : 'fa-eye'"></i>
+          </span>
+        </div>
+      </div>
+
+      <button type="submit" class="submit-btn" [disabled]="isLoading">
+        <span class="btn-text" *ngIf="!isLoading">Register</span>
+        <span class="spinner" *ngIf="isLoading"><i class="fas fa-spinner fa-spin"></i></span>
+      </button>
+    </form>
+
+    <!-- 2FA Form -->
+    <form *ngIf="show2FA" class="auth-form active" (ngSubmit)="onVerify2FA()">
+      <h2>Two-Factor Authentication</h2>
+      <p class="twofa-info">A verification code has been sent to your registered device/email.</p>
+      <div class="form-group">
+        <label for="twofa-code">Verification Code:</label>
+        <input type="text" id="twofa-code" name="twofaCode" [(ngModel)]="twoFaModel.code" required inputmode="numeric" pattern="[0-9]{6}" maxlength="6" />
+      </div>
+      <button type="submit" class="submit-btn" [disabled]="isLoading">
+        <span class="btn-text" *ngIf="!isLoading">Verify Code</span>
+        <span class="spinner" *ngIf="isLoading"><i class="fas fa-spinner fa-spin"></i></span>
+      </button>
+      <button type="button" class="resend-code-btn">Resend Code</button>
+    </form>
+  </div>
+
+  <footer class="app-footer">
+    <p>&copy; 2026 KarthikCodingSolutions. All rights reserved.</p>
+  </footer>
+</div>
+</body>
+</html>
