@@ -4,7 +4,6 @@ import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { NotificationService } from '../../services/notifications.service';
-import {CORS} from 
 
 @Component({
   selector: 'app-login',
@@ -107,6 +106,8 @@ export class Login {
     });
   }
 
+  http = inject(HttpClient);
+  
   // --- Sign-Up / Register Handler ---
   onRegister(): void {
     const error = this.validateRegister();

@@ -60,7 +60,7 @@
         <label for="remember-me">Remember me</label>
       </div>
 
-      <button type="submit" (click)="onRegister" class="submit-btn"  [disabled]="isLoading">
+      <button type="submit" () class="submit-btn"  [disabled]="isLoading">
         <span class="btn-text" *ngIf="!isLoading">Login</span>
         <span class="spinner" *ngIf="isLoading"><i class="fas fa-spinner fa-spin"></i></span>
       </button>

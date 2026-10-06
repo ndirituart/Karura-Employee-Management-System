@@ -16,9 +16,9 @@ builder.Services.AddCors(options =>
     options.AddPolicy("allowCors", policy =>
     {
         policy.WithOrigins("http://localhost:4200")
-              .AllowAnyHeader();
+              .AllowAnyHeader()
               .AllowAnyMethod();
-                .AllowCredentials();
+                .AllowCredentials()));
     });
 });
 
@@ -26,7 +26,6 @@ var app = builder.Build();
 
 app.UseRouting();
 app.UseCors("allowCors");
-app.UseCors("dev");
 app.UseAuthorization();
 
 app.MapControllers();

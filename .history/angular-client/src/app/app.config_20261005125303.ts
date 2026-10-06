@@ -7,6 +7,6 @@ export const appConfig: ApplicationConfig = {
   providers: [
     provideBrowserGlobalErrorListeners(),
     provideRouter(routes, withDebugTracing()), //to see errors on why routing fails
-    provideHttpClient() //API calls
+    provideHttpClient()
   ]
 };

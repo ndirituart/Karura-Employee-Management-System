@@ -35,7 +35,7 @@ export class Login {
   private readonly http = inject(HttpClient);
 
   // --- API Endpoint Base URL ---
-  private readonly apiUrl = 'http://localhost:5251/api/User';
+  private readonly apiUrl = 'http://localhost:5215/api/User';
 
   // --- Form View State ---
   activeTab: 'login' | 'register' = 'login';

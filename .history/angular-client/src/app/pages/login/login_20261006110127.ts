@@ -4,7 +4,6 @@ import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { NotificationService } from '../../services/notifications.service';
-import {CORS} from 
 
 @Component({
   selector: 'app-login',
@@ -107,8 +106,23 @@ export class Login {
     });
   }
 
+ 
+
   // --- Sign-Up / Register Handler ---
   onRegister(): void {
+
+    //injecting the HTTP
+    this.http.post<any>(`${this.apiUrl}/CreateNewUser`, {}).subscribe({
+      next: (res: any) => {
+        // Handle successful registration response
+        console.log('Registration successful:', res);
+      },
+      error: (err: any) => {
+        // Handle registration error
+        console.error('Registration failed:', err);
+      },
+    });
+
     const error = this.validateRegister();
     if (error) {
       this.notification.showError(error);

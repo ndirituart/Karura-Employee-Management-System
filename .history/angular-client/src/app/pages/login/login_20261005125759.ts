@@ -4,7 +4,7 @@ import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { NotificationService } from '../../services/notifications.service';
-import {CORS} from 
+import { provideHttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-login',
