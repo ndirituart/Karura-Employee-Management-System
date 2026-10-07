@@ -1,0 +1,57 @@
+{
+	"id": "6ac63e7787d8255373e8c685",
+	"name": "Karura Employee MIS",
+	"timestamp": "2026-10-07T12:43:39.397Z",
+	"collection_id": "BBE7accb60a7d3D71534Af73",
+	"folder_id": 0,
+	"environment_id": "0a6c6403-589c-454f-9f19-7342dd576d53",
+	"totalPass": 0,
+	"delay": 0,
+	"persist": true,
+	"status": "finished",
+	"startedAt": "2026-10-07T12:43:35.784Z",
+	"totalFail": 0,
+	"results": [],
+	"count": 1,
+	"totalTime": 0,
+	"collection": {
+		"requests": [
+			{
+				"id": "Bb862dC35b20a4C7bCD8350b"
+			},
+			{
+				"id": "d1A3f9f710C0bF1020efABbE"
+			},
+			{
+				"id": "Ecd9dAEDf9F662E1e4733fDa"
+			},
+			{
+				"id": "acd06dC6Ca70cc6BCc5eaDaC"
+			},
+			{
+				"id": "3beE64ECbC84cbEEf37AC34E"
+			},
+			{
+				"id": "A20A614e59f366eaaCD9F880"
+			},
+			{
+				"id": "E5eCe27f6EDB6fdE5dc84eC0"
+			},
+			{
+				"id": "4ddCfb8254Cc5e18cA4E5686"
+			},
+			{
+				"id": "Fd0cDA0BbdE2D6aEdB2aa1c2"
+			},
+			{
+				"id": "BA1CaB05c0CcD18e3cFBCb63"
+			},
+			{
+				"id": "Fc407EFdca5af629dD71DeFc"
+			},
+			{
+				"id": "CbbbA08D5D67EA20C33f7FAF"
+			}
+		]
+	}
+}
