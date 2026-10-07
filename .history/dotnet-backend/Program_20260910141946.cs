@@ -10,7 +10,7 @@ builder.Services.AddControllers();
 builder.Services.AddOpenApi();
 
 //temporary solution before PostgreSQL sets up
-// Register AppDbContext here once its namespace/reference is available.
+// Register ApplicationDbContext here once its namespace/reference is available.
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
     options.UseInMemoryDatabase("TestDb"));
 

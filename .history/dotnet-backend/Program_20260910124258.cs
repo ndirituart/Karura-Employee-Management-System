@@ -7,7 +7,7 @@ builder.Services.AddControllers();
 builder.Services.AddOpenApi();
 
 // Temporary solution before PostgreSQL is set up.
-// Register AppDbContext here once its namespace/reference is available.
+// Register ApplicationDbContext here once its namespace/reference is available.
 
 var app = builder.Build();
 

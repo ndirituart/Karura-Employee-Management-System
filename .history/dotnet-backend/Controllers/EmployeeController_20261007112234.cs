@@ -8,9 +8,9 @@ namespace dotnet_backend.Controllers
     [Route("api/[controller]")]
     public class EmployeeController : ControllerBase
     {
-        private readonly AppDbContext _context;
+        private readonly ApplicationDbContext _context;
 
-        public EmployeeController(AppDbContext context)
+        public EmployeeController(ApplicationDbContext context)
         {
             _context = context;
         }

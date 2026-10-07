@@ -1,9 +1,9 @@
 using Microsoft.EntityFrameworkCore; //important import
 using dotnet_backend.Models; //important import
 
-public class AppDbContext : DbContext
+public class ApplicationDbContext : DbContext
 {
-    public AppDbContext(DbContextOptions<AppDbContext> options) : base(options) { }
+    public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options) { }
 
     //1. Object one users
     public DbSet<User> Users => Set<User>();
