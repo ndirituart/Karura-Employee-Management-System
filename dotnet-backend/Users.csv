@@ -1,0 +1,8 @@
+"userId","emailId","fullName","mobileNo","password","role","createdDate"
+1,"john.doe@example.com","John Doe","+254712345678","HashedPassword123!","Admin","2026-09-22 11:40:43.438517+03"
+2,"jane.smith@example.com","Jane Smith","+254722987654","HashedPassword123!","Forest Manager","2026-09-22 11:40:43.438517+03"
+3,"samuel.njogu@example.com","Samuel Njogu","+254733112233","HashedPassword123!","Ranger","2026-09-22 11:40:43.438517+03"
+4,"grace.wambui@example.com","Grace Wambui","+254744556677","HashedPassword123!","Ecologist","2026-09-22 11:40:43.438517+03"
+5,"david.otieno@example.com","David Otieno","+254755889900","HashedPassword123!","Conservation Officer","2026-09-22 11:40:43.438517+03"
+7,"test.user@example.com","Test User","+254712345678","Password123!","Admin","2026-10-05T09:44:32.3216685Z"
+8,"ndiritupatience002@gmail.com","Patience Njeri Ndiritu","ndiritupatience002@gmail.com","123456abc!","Forest Manager","2026-10-06T08:50:36.589Z"

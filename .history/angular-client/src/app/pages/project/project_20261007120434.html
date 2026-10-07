@@ -1,0 +1,95 @@
+<!--An Angular component template must be a fragment — no <!DOCTYPE>, no <html>, <head>, <body>, no <title>, no CDN <link>.
+  The browser ignores all of it when Angular injects it inside <app-project>, and you get weird layout bugs.-->
+<section class="project-page">
+  <h2>Projects</h2>
+
+  <div *ngIf="errorMessage" class="alert alert-error">{{ errorMessage }}</div>
+  <div *ngIf="successMessage" class="alert alert-success">{{ successMessage }}</div>
+
+  <form class="project-form" [formGroup]="projectForm" (ngSubmit)="onSubmit()">
+    <div class="row">
+      <div class="field">
+        <label for="projectName">Project Name</label>
+        <input id="projectName" type="text" formControlName="projectName"
+               placeholder="Enter project name">
+        <span class="field-error"
+              *ngIf="projectForm.get('projectName')?.touched && projectForm.get('projectName')?.invalid">
+          Project name is required.
+        </span>
+      </div>
+
+      <div class="field">
+        <label for="clientName">Client Name</label>
+        <input id="clientName" type="text" formControlName="clientName"
+               placeholder="Enter client name">
+        <span class="field-error"
+              *ngIf="projectForm.get('clientName')?.touched && projectForm.get('clientName')?.invalid">
+          Client name is required.
+        </span>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="field">
+        <label for="startDate">Start Date</label>
+        <input id="startDate" type="date" formControlName="startDate">
+      </div>
+
+      <div class="field">
+        <label for="leadByEmpId">Lead By Employee ID</label>
+        <input id="leadByEmpId" type="number" formControlName="leadByEmpId"
+               placeholder="Enter lead employee ID">
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="field">
+        <label for="contactPerson">Contact Person</label>
+        <input id="contactPerson" type="text" formControlName="contactPerson"
+               placeholder="Enter contact person name">
+      </div>
+
+      <div class="field">
+        <label for="contactNoProject">Contact No</label>
+        <input id="contactNoProject" type="text" formControlName="contactNoProject"
+               placeholder="Enter contact number">
+      </div>
+    </div>
+
+    <div class="form-actions">
+      <button type="submit" class="btn btn-primary" [disabled]="projectForm.invalid || saving">
+        {{ editingId === null ? 'Create Project' : 'Update Project' }}
+      </button>
+      <button type="button" class="btn btn-secondary" *ngIf="editingId !== null" (click)="cancelEdit()">
+        Cancel
+      </button>
+    </div>
+  </form>
+
+  <h3>Project List</h3>
+
+  <div *ngIf="loading" class="loading">Loading projects…</div>
+
+  <div class="project-table-wrapper" *ngIf="!loading">
+    <table class="project-table">
+      <thead>
+        <tr>
+          <th>Project ID</th>
+          <th>Project Name</th>
+          <th>Client Name</th>
+          <th>Start Date</th>
+          <th>Lead By Employee</th>
+          <th>Contact Person</th>
+          <th>Contact No</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+       
+        <tr *ngIf="projects.length === 0">
+          <td colspan="8" class="empty-state">No projects yet. Create one above.</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</section>
