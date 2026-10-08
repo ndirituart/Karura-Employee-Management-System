@@ -31,7 +31,7 @@ namespace dotnet_backend.Controllers
             }
 
             // Prevent duplicate link: one employee per user
-            var alreadyLinked = await _context.Employee
+            var alreadyLinked = await _context.Employees
                 .AnyAsync(e => e.userId == obj.userId && !e.isDeleted);
             if (alreadyLinked)
             {
@@ -48,7 +48,7 @@ namespace dotnet_backend.Controllers
             // TO-DO: Role comes from the User, not the request body
             obj.role = user.role;
 
-            _context.Employee.Add(obj);
+            _context.Employees.Add(obj);
             await _context.SaveChangesAsync();
 
             return CreatedAtAction(nameof(GetEmployee), new { id = obj.employeeId }, obj);
@@ -58,7 +58,7 @@ namespace dotnet_backend.Controllers
         private async Task<string> GenerateNextEmployeeIdAsync()
         {
             // Pull all IDs that match EMP-### (including soft-deleted, so numbers don't get reused)
-            var existingIds = await _context.Employee
+            var existingIds = await _context.Employees
                 .Where(e => e.employeeId.StartsWith("EMP-"))
                 .Select(e => e.employeeId)
                 .ToListAsync();
@@ -77,7 +77,7 @@ namespace dotnet_backend.Controllers
         [HttpGet]
         public async Task<IActionResult> GetAllEmployee()
         {
-            var list = await _context.Employee
+            var list = await _context.Employees
                 .Where(e => !e.isDeleted)
                 .OrderBy(e => e.employeeId)
                 .ToListAsync();
@@ -88,7 +88,7 @@ namespace dotnet_backend.Controllers
         [HttpGet("{id}")]
         public async Task<IActionResult> GetEmployee(string id)
         {
-            var employee = await _context.Employee
+            var employee = await _context.Employees
                 .FirstOrDefaultAsync(e => e.employeeId == id && !e.isDeleted);
 
             if (employee == null) return NotFound();
@@ -101,7 +101,7 @@ namespace dotnet_backend.Controllers
         [HttpPut("{id}")]
         public async Task<IActionResult> UpdateEmployee(string id, [FromBody] Employee employee)
         {
-            var existing = await _context.Employee
+            var existing = await _context.Employees
                 .FirstOrDefaultAsync(e => e.employeeId == id && !e.isDeleted);
 
             if (existing == null) return NotFound();
@@ -131,7 +131,7 @@ namespace dotnet_backend.Controllers
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteEmployee(string id)
         {
-            var employee = await _context.Employee
+            var employee = await _context.Employees
                 .FirstOrDefaultAsync(e => e.employeeId == id && !e.isDeleted);
 
             if (employee == null) return NotFound();

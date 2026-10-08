@@ -22,7 +22,7 @@ public class EmployeeController : ControllerBase
     public IActionResult CreateEmployee([FromBody] Employee obj)
     {
         //Employee must have an existing UserId
-        var employeeExistWithUserId = _context.Employees.FirstOrDefault(u => u.userId == obj.userId);
+        var employeeExistWithUserId = _context.Employeess.FirstOrDefault(u => u.userId == obj.userId);
 
         // If employee does NOT exist, create the account
         if (employeeExistWithUserId == null)
@@ -40,7 +40,7 @@ public class EmployeeController : ControllerBase
     [HttpPost("Login")]
     public IActionResult Login([FromBody] EmployeeLogin employeeLogin)
     {
-        var employee = _context.Employees.FirstOrDefault(u => u.emailId == employeeLogin.emailId && u.password == employeeLogin.password);
+        var employee = _context.Employeess.FirstOrDefault(u => u.emailId == employeeLogin.emailId && u.password == employeeLogin.password);
         
         if (employee == null)
         {
@@ -54,7 +54,7 @@ public class EmployeeController : ControllerBase
     [HttpGet("GetEmployees")]
     public IActionResult GetEmployees()
     {
-        var list = _context.Employees.ToList();
+        var list = _context.Employeess.ToList();
         return Ok(list);
     }
 
@@ -62,7 +62,7 @@ public class EmployeeController : ControllerBase
     [HttpGet("{id:int}")]
     public IActionResult GetEmployee(int id)
     {
-        var employee = _context.Employees.FirstOrDefault(u => u.employeeId == id);
+        var employee = _context.Employeess.FirstOrDefault(u => u.employeeId == id);
         if (employee == null)
         {
             return NotFound();
@@ -74,7 +74,7 @@ public class EmployeeController : ControllerBase
     [HttpPut("{id:int}")]
     public IActionResult UpdateEmployee(int id, [FromBody] Employee employee)
     {
-        var existingEmployee = _context.Employees.FirstOrDefault(u => u.employeeId == id);
+        var existingEmployee = _context.Employeess.FirstOrDefault(u => u.employeeId == id);
         if (existingEmployee == null)
         {
             return NotFound();
@@ -93,13 +93,13 @@ public class EmployeeController : ControllerBase
     [HttpDelete("{id:int}")]
     public IActionResult DeleteEmployee(int id)
     {
-        var employee = _context.Employees.FirstOrDefault(u => u.employeeId == id);
+        var employee = _context.Employeess.FirstOrDefault(u => u.employeeId == id);
         if (employee == null)
         {
             return NotFound();
         }
 
-        _context.Employees.Remove(employee);
+        _context.Employeess.Remove(employee);
         _context.SaveChanges();
         return NoContent();
     }

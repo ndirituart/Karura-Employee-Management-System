@@ -54,7 +54,7 @@ namespace dotnet_backend.Controllers
             // If a lead employee is specified, verify they exist
             if (obj.leadByEmpId.HasValue)
             {
-                var empExists = await _context.Employees
+                var empExists = await _context.Employeess
                     .AnyAsync(e => e.employeeId == obj.leadByEmpId.ToString() && !e.isDeleted);
                 // If your Employees.employeeId is a string "EMP-001", the check above
                 // needs the string form. If it's an int, use obj.leadByEmpId.Value directly.
